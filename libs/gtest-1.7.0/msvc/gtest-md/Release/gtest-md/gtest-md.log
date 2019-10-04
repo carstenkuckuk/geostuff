@@ -1,0 +1,20 @@
+﻿Build started 5/26/2015 4:14:10 PM.
+     1>Project "C:\Projekte\NewInstaller\libs\gtest-1.7.0\msvc\gtest-md.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "gtest-md/Release\gtest-md\gtest-md.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.. /I..\include /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _LIB /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"gtest-md/Release\gtest-md\\" /Fd"gtest-md/Release\gtest-md\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt "..\src\gtest-all.cc"
+         gtest-all.cc
+     1>C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(1151,5): warning MSB8012: TargetPath(C:\Projekte\NewInstaller\libs\gtest-1.7.0\msvc\gtest-md/Release\gtest-md.lib) entspricht nicht dem OutputFile-Eigenschaftswert (C:\Projekte\NewInstaller\libs\gtest-1.7.0\msvc\gtest-md\Release\gtest.lib) von Library. Das Projekt wird daher möglicherweise nicht ordnungsgemäß erstellt. Damit dieses Problem behoben werden kann, müssen die Eigenschaftswerte für $(OutDir), $(TargetName) und $(TargetExt) dem in %(Lib.OutputFile) angegebenen Wert entsprechen.
+     1>C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(1153,5): warning MSB8012: TargetName(gtest-md) entspricht nicht dem OutputFile-Eigenschaftswert (gtest) von Library. Das Projekt wird daher möglicherweise nicht ordnungsgemäß erstellt. Damit dieses Problem behoben werden kann, müssen die Eigenschaftswerte für $(OutDir), $(TargetName) und $(TargetExt) dem in %(Lib.OutputFile) angegebenen Wert entsprechen.
+       Lib:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"gtest-md/Release\gtest.lib" /NOLOGO "gtest-md/Release\gtest-md\gtest-all.obj"
+         gtest-md.vcxproj -> C:\Projekte\NewInstaller\libs\gtest-1.7.0\msvc\gtest-md/Release\gtest-md.lib
+       FinalizeBuildStatus:
+         Deleting file "gtest-md/Release\gtest-md\gtest-md.unsuccessfulbuild".
+         Touching "gtest-md/Release\gtest-md\gtest-md.lastbuildstate".
+     1>Done Building Project "C:\Projekte\NewInstaller\libs\gtest-1.7.0\msvc\gtest-md.vcxproj" (build target(s)).
+
+Das Erstellen war erfolgreich.
+
+Time Elapsed 00:00:04.63
