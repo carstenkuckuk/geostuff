@@ -5,6 +5,8 @@ project(geostuff)
 set(CMAKE_BUILD_TYPE Release)
 
 add_executable(distancefromlatlonglatlong
-    src/distancefromlatlonglatlong.cpp
+	src/GPSObservation.cpp
+	src/GPSObservation.hpp
+    src/tools/distancefromlatlonglatlong.cpp
 )
 
