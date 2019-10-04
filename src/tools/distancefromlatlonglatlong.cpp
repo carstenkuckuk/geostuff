@@ -24,11 +24,8 @@ int main(int argc, const char** argv)
 {
 	int nRet = 0;
 
-	GPSObservation p1(51.4818445, 7.2162363);// Bochum
-	GPSObservation p2(51.5135872, 7.4652981);// Dortmund
-
-//	51.4818445 7.2162363 51.5135872 7.4652981
-
+	GPSObservation p1;
+	GPSObservation p2;
 
 	bool bParsedProperly = ParseCommandLine(p1, p2, argc, argv);
 
