@@ -11,10 +11,14 @@ static const double pi = 3.14159265358979323846;
 class GPSObservation
 {
 public:
-	GPSObservation(double dLat=0.0, double dLong=0.0) :m_dLat(dLat), m_dLong(dLong) {};
+	GPSObservation(double dLat=0.0, double dLong=0.0, double dElevationAboveSealevelInMeters=0.0)
+		:m_dLat(dLat), m_dLong(dLong), 
+		m_dElevationAboveSealevelInMeters(dElevationAboveSealevelInMeters){};
+	bool operator==(const GPSObservation &refThat) const;
 
 	double m_dLat; // degrees
 	double m_dLong; // degrees
+	double m_dElevationAboveSealevelInMeters;
 };
 
 double DegreesToRadians(double dDegrees);

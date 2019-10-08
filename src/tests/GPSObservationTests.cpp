@@ -8,7 +8,17 @@
 
 // Google Test Library:
 #include "gtest/gtest.h"
+TEST(GPSObservationTests, OperatorEquals)
+{
+	GPSObservation goBochum(51.4818445, 7.2162363);
+	GPSObservation goBochum2(51.4818445, 7.2162363);
+	GPSObservation goDortmund(51.5135872, 7.4652981);
 
+	ASSERT_TRUE(goBochum == goBochum);
+	ASSERT_TRUE(goBochum == goBochum2);
+
+	ASSERT_FALSE(goBochum == goDortmund);
+}
 
 TEST(GPSObservationTests, DinstanceInMeters)
 {
