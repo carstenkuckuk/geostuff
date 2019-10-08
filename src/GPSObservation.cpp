@@ -27,3 +27,12 @@ double DinstanceInMeters(const GPSObservation &p1, const GPSObservation &p2)
 	return d * 1000.0;
 }
 
+bool GPSObservation::operator==(const GPSObservation &refThat) const
+{
+	const double dEpsilon = 0.00001;
+	const bool bEqual =
+		(fabs(m_dLat - refThat.m_dLat) < dEpsilon) &&
+		(fabs(m_dLong - refThat.m_dLong) < dEpsilon) &&
+		(fabs(m_dElevationAboveSealevelInMeters - refThat.m_dElevationAboveSealevelInMeters) < dEpsilon);
+	return bEqual;
+};
