@@ -20,3 +20,23 @@ add_executable(distancefromlatlonglatlong
     src/tools/distancefromlatlonglatlong.cpp
 )
 
+
+add_executable(wiglewifitotrackfile
+	src/GPSObservation.cpp
+	src/GPSObservation.hpp
+	src/GPSTrackFile.cpp
+	src/GPSTrackFile.hpp
+	src/WigleWifiDatabase.cpp
+	src/WigleWifiDatabase.hpp
+
+	libs/sqlite-amalgamation-3081002/sqlite3.c
+	libs/sqlite-amalgamation-3081002/sqlite3.h
+
+    src/tools/wiglewifitotrackfile.cpp
+)
+
+add_executable(sqlite3
+	libs/sqlite-amalgamation-3081002/shell.c
+	libs/sqlite-amalgamation-3081002/sqlite3.c
+	libs/sqlite-amalgamation-3081002/sqlite3.h
+)
