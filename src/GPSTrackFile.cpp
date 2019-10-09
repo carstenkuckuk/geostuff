@@ -103,3 +103,15 @@ bool GPSTrackFile::WriteGPSObservationToFile(const GPSObservation &refGO) // tru
 	}
 	return bSuccess;
 }
+
+bool GPSTrackFile::WriteGPSObservationsToFile(const std::vector<GPSObservation> &refrgObservations)  // true=success, false: real failure
+{
+	bool bErg = true;
+
+	for (auto o : refrgObservations)
+	{
+		bool bSuccess = WriteGPSObservationToFile(o);
+		bErg = bErg && bSuccess;
+	}
+	return bErg;
+}

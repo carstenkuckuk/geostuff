@@ -9,6 +9,7 @@
 
 #include "GPSObservation.hpp"
 #include <string>
+#include <vector>
 // Fuer den FILE-Pointer:
 #include <stdio.h>
 
@@ -24,6 +25,7 @@ public:
 
 	virtual bool ReadGPSObservationFromFile(GPSObservation &refGO); // true=success, false=failure i.e. end of file reached
 	virtual bool WriteGPSObservationToFile(const GPSObservation &refGO); // true=success, false: real failure
+	virtual bool WriteGPSObservationsToFile(const std::vector<GPSObservation> &refrgObservations);  // true=success, false: real failure
 
 	std::string m_strFileName;
 	FILE *m_fp;
