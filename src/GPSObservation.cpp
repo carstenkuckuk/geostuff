@@ -7,6 +7,7 @@
 #include "GPSObservation.hpp"
 
 #include <cmath>
+#include <ctime>
 
 double DegreesToRadians(double dDegrees)
 {
@@ -38,3 +39,20 @@ bool GPSObservation::operator==(const GPSObservation &refThat) const
 		(fabs(m_dElevationAboveSealevelInMeters - refThat.m_dElevationAboveSealevelInMeters) < dEpsilon);
 	return bEqual;
 };
+
+std::string DateTimeToString(__int64 nDateTime)
+{
+	std::string strErg;
+
+
+	// nDateTime ist im WigleWifi Format. Das müßte die Java-Epoche sein
+	time_t tt = nDateTime / 1000;
+	struct tm * timeinfo = localtime(&tt);
+
+	char buf[200] = { 0 };
+
+	strftime(buf, 199, "%Y-%m-%d %H:%M:%S", timeinfo);
+
+	strErg = buf;
+	return strErg;
+}

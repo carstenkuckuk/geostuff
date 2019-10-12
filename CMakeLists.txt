@@ -21,6 +21,18 @@ add_executable(distancefromlatlonglatlong
 )
 
 
+add_executable(wiglewifistats
+	src/GPSObservation.cpp
+	src/GPSObservation.hpp
+	src/WigleWifiDatabase.cpp
+	src/WigleWifiDatabase.hpp
+
+	libs/sqlite-amalgamation-3081002/sqlite3.c
+	libs/sqlite-amalgamation-3081002/sqlite3.h
+
+    src/tools/wiglewifistats.cpp
+)
+
 add_executable(wiglewifitotrackfile
 	src/GPSObservation.cpp
 	src/GPSObservation.hpp

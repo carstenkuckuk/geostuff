@@ -43,3 +43,11 @@ TEST(GPSObservationTests, DinstanceInMeters)
 	// Ein Rechenfehler von 200m auf 700km ist gut genug für unser Hackprojekt
 
 }
+
+TEST(GPSObservationTests, DateTimeToString)
+{
+	std::string strDate1 = DateTimeToString(1565259232000);
+	ASSERT_STREQ("asdasd", strDate1.c_str());
+
+}
+
