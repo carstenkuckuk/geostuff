@@ -85,9 +85,13 @@ bool GPSTrackFile::ReadGPSObservationFromFile(GPSObservation &refGO) // true=suc
 	bool bSuccess = false;
 	if (m_bOpenedForReading)
 	{
+		char buf[200]; buf[0] = 0;
 		int nRes=
-		fscanf(m_fp, "%lf, %lf, %lf\n", &refGO.m_dLat, &refGO.m_dLong, &refGO.m_dElevationAboveSealevelInMeters);
-		bSuccess = (nRes==3);
+		fscanf(m_fp, "%d, %lf, %lf, %lf, %lf, %[^\n]\n", 
+			&refGO.m_nDateTime, &refGO.m_dLat, &refGO.m_dLong, &refGO.m_dElevationAboveSealevelInMeters,
+			&refGO.m_dVelocity_km_per_hour, &buf);
+		refGO.m_strComment = buf;
+		bSuccess = (nRes==6);
 	}
 
 	return bSuccess;
@@ -98,7 +102,10 @@ bool GPSTrackFile::WriteGPSObservationToFile(const GPSObservation &refGO) // tru
 	bool bSuccess = false;
 	if (m_bOpenedForWriting)
 	{
-		fprintf(m_fp, "%lf, %lf, %lf\n", refGO.m_dLat, refGO.m_dLong, refGO.m_dElevationAboveSealevelInMeters);
+		fprintf(m_fp, "%d, %lf, %lf, %lf, %lf, %s\n", 
+			refGO.m_nDateTime, refGO.m_dLat, refGO.m_dLong, refGO.m_dElevationAboveSealevelInMeters,
+			refGO.m_dVelocity_km_per_hour, refGO.m_strComment.c_str()
+			);
 		bSuccess = true;
 	}
 	return bSuccess;

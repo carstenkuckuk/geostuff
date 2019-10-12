@@ -4,7 +4,7 @@
 // Lat+Long+Time
 //
 
-#include "GPSObservation.hpp""
+#include "GPSObservation.hpp"
 
 #include <cmath>
 
@@ -31,6 +31,8 @@ bool GPSObservation::operator==(const GPSObservation &refThat) const
 {
 	const double dEpsilon = 0.00001;
 	const bool bEqual =
+		(fabs(m_dVelocity_km_per_hour-refThat.m_dVelocity_km_per_hour)<dEpsilon) &&
+		(m_nDateTime==refThat.m_nDateTime) &&
 		(fabs(m_dLat - refThat.m_dLat) < dEpsilon) &&
 		(fabs(m_dLong - refThat.m_dLong) < dEpsilon) &&
 		(fabs(m_dElevationAboveSealevelInMeters - refThat.m_dElevationAboveSealevelInMeters) < dEpsilon);

@@ -49,9 +49,9 @@ void WigleWifiDatabase::ReadAllGPSObservations(std::vector<GPSObservation>  &ref
 			go.m_dLat = dLat;
 			go.m_dLong = dLon;
 			go.m_dElevationAboveSealevelInMeters = dAlt;
-			// Zeit fehlt notch
+			go.m_nDateTime = nTime;
+			go.m_dVelocity_km_per_hour = 0.0; // TO DO: Berechnen!!!!!!!
 			refrgGPSObservations.push_back(go);
-
 		}
 
 		sqlite3_finalize(pStmt);

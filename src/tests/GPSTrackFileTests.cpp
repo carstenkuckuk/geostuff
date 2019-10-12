@@ -13,10 +13,10 @@
 
 TEST(GPSTrackFileTests, WriteToFileThenReadFromFile)
 {
-	GPSObservation goBochum(51.4818445, 7.2162363);
-	GPSObservation goDortmund(51.5135872, 7.4652981);
-	GPSObservation goRecklinghausen(51.6140649, 7.1979453);
-	GPSObservation goHirtshals(57.588120, 9.959220);
+	GPSObservation goBochum(0, 51.4818445, 7.2162363,0,0,"Bochum");
+	GPSObservation goDortmund(0, 51.5135872, 7.4652981,0,0,"Dortmund");
+	GPSObservation goRecklinghausen(0, 51.6140649, 7.1979453,0,0,"Recklinghausen");
+	GPSObservation goHirtshals(0, 57.588120, 9.959220,0,0,"Hirtshals");
 
 	GPSTrackFile gtf1;
 	gtf1.OpenForWrite("GPSTrackFileTests.trackfile");
