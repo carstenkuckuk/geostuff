@@ -22,6 +22,9 @@ public:
 	virtual bool Close();
 
 	virtual void ReadAllGPSObservations(std::vector<GPSObservation>  &refrgGPSObservations);
+	virtual __int64 SelectAsInt64(std::string strSQL);
+	virtual double SelectAsDouble(std::string strSQL);
+private:
 	sqlite3 *m_pDB;
 };
 

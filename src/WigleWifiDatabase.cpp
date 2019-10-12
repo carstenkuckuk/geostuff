@@ -58,3 +58,48 @@ void WigleWifiDatabase::ReadAllGPSObservations(std::vector<GPSObservation>  &ref
 	}
 
 }
+
+__int64 WigleWifiDatabase::SelectAsInt64(std::string strSQL)
+{
+	sqlite3_int64 nErg = 0;
+
+	sqlite3_stmt *pStmt = 0;
+	const char *pszTail = 0;
+
+	int nErgPrepare = sqlite3_prepare_v2(m_pDB, strSQL.c_str(), strSQL.size(), &pStmt, &pszTail);
+	if (nErgPrepare == SQLITE_OK)
+	{
+		int nErgStep = sqlite3_step(pStmt);
+		if(nErgStep == SQLITE_ROW)
+		{
+			nErg = sqlite3_column_int64(pStmt, 0);
+		}
+
+		sqlite3_finalize(pStmt);
+	}
+
+	return nErg;
+}
+
+double WigleWifiDatabase::SelectAsDouble(std::string strSQL)
+{
+	double dErg = 0.0;
+
+	sqlite3_stmt *pStmt = 0;
+	const char *pszTail = 0;
+
+	int nErgPrepare = sqlite3_prepare_v2(m_pDB, strSQL.c_str(), strSQL.size(), &pStmt, &pszTail);
+	if (nErgPrepare == SQLITE_OK)
+	{
+		int nErgStep = sqlite3_step(pStmt);
+		if (nErgStep == SQLITE_ROW)
+		{
+			dErg = sqlite3_column_double(pStmt, 0);
+		}
+
+		sqlite3_finalize(pStmt);
+	}
+
+	return dErg;
+}
+
