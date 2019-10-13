@@ -24,6 +24,7 @@ public:
 	virtual void Close();
 
 	virtual bool ReadGPSObservationFromFile(GPSObservation &refGO); // true=success, false=failure i.e. end of file reached
+	virtual bool ReadGPSObservationsFromFile(std::vector<GPSObservation> &refrgObservations); // true=success, false=failure
 	virtual bool WriteGPSObservationToFile(const GPSObservation &refGO); // true=success, false: real failure
 	virtual bool WriteGPSObservationsToFile(const std::vector<GPSObservation> &refrgObservations);  // true=success, false: real failure
 

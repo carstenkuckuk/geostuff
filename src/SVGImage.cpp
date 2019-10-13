@@ -111,14 +111,14 @@ void SVGImage::LineTo(double dX, double dY) // Adds a Line to the SVG contents a
 	m_dCurrentPositionY = dY;
 }
 
-void SVGImage::DiskAt(double dX, double dY) // Adds a Circle/disk/dot to the contents and moves the virtual cursor
+void SVGImage::DiskAt(double dX, double dY, std::string strColor) // Adds a Circle/disk/dot to the contents and moves the virtual cursor
 {
 	double px = ((dX- m_dXMin)/(m_dXMax-m_dXMin)) * m_dWidth_mm;
-	double py = ((dY - m_dYMin) / (m_dYMax - m_dYMin)) * m_dHeight_mm;
+	double py = m_dHeight_mm - ((dY - m_dYMin) / (m_dYMax - m_dYMin)) * m_dHeight_mm;
 	// tbd m_rgLines
 
 	char buf[200] = { 0 };
-	sprintf(buf, "<circle cx=\"%lf\" cy=\"%lf\" r=\"0.2\"/>", px, py);
+	sprintf(buf, "<circle cx=\"%lf\" cy=\"%lf\" r=\"0.2\" fill=\"%s\"/>", px, py, strColor.c_str());
 	std::string strLine = buf;
 	m_rgLines.push_back(strLine);
 

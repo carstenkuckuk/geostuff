@@ -44,9 +44,29 @@ void ReadGPSTrackfileAndWriteToSVGFile(const std::string strGPSTrackFilename, co
 	for (auto o : rgGPSObservations)
 	{
 		double d = DinstanceInMeters(oLastObs, o);
+		double dinkm = d / 1000;
+		double dTime = o.m_nDateTime - oLastObs.m_nDateTime; // in millisekunden
+		double dTimeinH = dTime / 1000.0 / 60.0 / 60.0;;
+		double v = dinkm / dTimeinH;
 		if (d > 50)
 		{
-			svg.DiskAt(o.m_dLong, o.m_dLat);
+			if ((0 <= v) && (v <= 10))
+			{ // Fussgaenger
+				svg.DiskAt(o.m_dLong, o.m_dLat, "green");
+
+			}
+			else
+				if ((10 <= v) && (v <= 50))
+				{// Strasse
+					svg.DiskAt(o.m_dLong, o.m_dLat,"black");
+
+				}
+				else
+				{//Autobahn
+				svg.DiskAt(o.m_dLong, o.m_dLat,"blue");
+
+			}
+
 			oLastObs = o;
 		}
 	}
