@@ -74,7 +74,7 @@ std::vector<std::string> SVGImage::CreateHeaderLines()
 
 	char buf[300] = { 0 };
 	sprintf(buf, 
-		"width=\"%lf\" height=\"%lf\" viewBox=\"%lf %lf %lf %lf\"", 
+		"width=\"%lfmm\" height=\"%lfmm\" viewBox=\"%lf %lf %lf %lf\"", 
 		m_dWidth_mm, m_dHeight_mm, 
 		0, 0,
 		m_dWidth_mm, m_dHeight_mm
@@ -118,7 +118,7 @@ void SVGImage::DiskAt(double dX, double dY, std::string strColor) // Adds a Circ
 	// tbd m_rgLines
 
 	char buf[200] = { 0 };
-	sprintf(buf, "<circle cx=\"%lf\" cy=\"%lf\" r=\"0.2\" fill=\"%s\"/>", px, py, strColor.c_str());
+	sprintf(buf, "<circle cx=\"%lf\" cy=\"%lf\" r=\"0.02\" fill=\"%s\"/>", px, py, strColor.c_str());
 	std::string strLine = buf;
 	m_rgLines.push_back(strLine);
 

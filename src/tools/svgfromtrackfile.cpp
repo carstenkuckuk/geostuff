@@ -48,7 +48,7 @@ void ReadGPSTrackfileAndWriteToSVGFile(const std::string strGPSTrackFilename, co
 		double dTime = o.m_nDateTime - oLastObs.m_nDateTime; // in millisekunden
 		double dTimeinH = dTime / 1000.0 / 60.0 / 60.0;;
 		double v = dinkm / dTimeinH;
-		if (d > 50)
+		if (d > 20)
 		{
 			if ((0 <= v) && (v <= 10))
 			{ // Fussgaenger
