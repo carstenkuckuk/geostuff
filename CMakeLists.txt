@@ -21,6 +21,19 @@ add_executable(distancefromlatlonglatlong
 )
 
 
+add_executable(svgfromtrackfile
+	src/GPSObservation.cpp
+	src/GPSObservation.hpp
+	src/GPSTrackFile.cpp
+	src/GPSTrackFile.hpp
+	src/SVGImage.cpp
+	src/SVGImage.hpp
+
+    src/tools/svgfromtrackfile.cpp
+)
+
+
+
 add_executable(wiglewifistats
 	src/GPSObservation.cpp
 	src/GPSObservation.hpp

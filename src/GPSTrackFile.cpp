@@ -97,6 +97,25 @@ bool GPSTrackFile::ReadGPSObservationFromFile(GPSObservation &refGO) // true=suc
 	return bSuccess;
 }
 
+bool GPSTrackFile::ReadGPSObservationsFromFile(std::vector<GPSObservation> &refrgObservations) // true=success, false=failure
+{
+	bool bFileEndReached = false;
+	while (!bFileEndReached)
+	{
+		GPSObservation go;
+		bool bSuccess = ReadGPSObservationFromFile(go);
+		if (bSuccess)
+		{
+			refrgObservations.push_back(go);
+		}
+		else
+		{
+			bFileEndReached = true;
+		}
+	}
+	return true;
+}
+
 bool GPSTrackFile::WriteGPSObservationToFile(const GPSObservation &refGO) // true=success, false: real failure
 {
 	bool bSuccess = false;
