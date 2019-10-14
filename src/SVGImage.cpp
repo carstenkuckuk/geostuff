@@ -125,3 +125,17 @@ void SVGImage::DiskAt(double dX, double dY, std::string strColor) // Adds a Circ
 	m_dCurrentPositionX = dX;
 	m_dCurrentPositionY = dY;
 }
+
+void SVGImage::TextAt(double dX, double dY, std::string strText) // Adds a Label to the contents and moves the virtual cursor
+{
+	double px = ((dX - m_dXMin) / (m_dXMax - m_dXMin)) * m_dWidth_mm;
+	double py = m_dHeight_mm - ((dY - m_dYMin) / (m_dYMax - m_dYMin)) * m_dHeight_mm;
+
+	char buf[200] = { 0 };
+	sprintf(buf, "<text x=\"%lf\" y=\"%lf\" text-anchor=\"middle\" fill=\"black\" style=\"font-size:5\">%s</text>", px, py, strText.c_str());
+	std::string strLine = buf;
+	m_rgLines.push_back(strLine);
+
+	m_dCurrentPositionX = dX;
+	m_dCurrentPositionY = dY;
+}

@@ -21,6 +21,19 @@ add_executable(distancefromlatlonglatlong
 )
 
 
+add_executable(svgfromlabellist
+	src/GPSObservation.cpp
+	src/GPSObservation.hpp
+	src/GPSTrackFile.cpp
+	src/GPSTrackFile.hpp
+	src/SVGImage.cpp
+	src/SVGImage.hpp
+
+    src/tools/svgfromlabellist.cpp
+)
+
+
+
 add_executable(svgfromtrackfile
 	src/GPSObservation.cpp
 	src/GPSObservation.hpp

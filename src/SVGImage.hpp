@@ -24,6 +24,7 @@ public:
 	virtual void MoveTo(double dX, double dY); // Moves virtual Cursor
 	virtual void LineTo(double dX, double dY); // Adds a Line to the SVG contents and moves the virtual cursor
 	virtual void DiskAt(double dX, double dY, std::string strColor="black"); // Adds a Circle/disk/dot to the contents and moves the virtual cursor
+	virtual void TextAt(double dX, double dY, std::string strText); // Adds a Label to the contents and moves the virtual cursor
 private:
 	virtual std::vector<std::string> CreateHeaderLines();
 	virtual std::vector<std::string> CreateFooterLines();
