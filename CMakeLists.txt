@@ -32,7 +32,12 @@ add_executable(svgfromlabellist
     src/tools/svgfromlabellist.cpp
 )
 
+add_executable(svgfromstackofsvgs
+	src/SVGImage.cpp
+	src/SVGImage.hpp
 
+    src/tools/svgfromstackofsvgs.cpp
+)
 
 add_executable(svgfromtrackfile
 	src/GPSObservation.cpp
@@ -78,3 +83,5 @@ add_executable(sqlite3
 	libs/sqlite-amalgamation-3081002/sqlite3.c
 	libs/sqlite-amalgamation-3081002/sqlite3.h
 )
+
+

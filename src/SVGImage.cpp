@@ -3,6 +3,9 @@
 //
 #include "SVGImage.hpp"
 
+#include <iostream>
+#include <fstream>
+
 SVGImage::SVGImage(double dWidth_mm, double dHeight_mm,
 	double dXMin, double dXMax,
 	double dYMin, double dYMax)
@@ -18,11 +21,11 @@ SVGImage::~SVGImage()
 	// Nothing to do
 }
 
-void SVGImage::WriteToFile(std::string strFilename)
+void SVGImage::WriteToFile(const std::string &refstrFilename)
 {
 	std::vector<std::string> rgHeader = CreateHeaderLines();
 	std::vector<std::string> rgFooter = CreateFooterLines();
-	FILE *fp= fopen(strFilename.c_str(), "w");
+	FILE *fp= fopen(refstrFilename.c_str(), "w");
 	if (fp)
 	{
 		for (auto line : rgHeader)
@@ -98,6 +101,34 @@ std::vector<std::string> SVGImage::CreateFooterLines()
 	return rgErg;
 }
 
+static void ReadFileContentsIntoVectorOfStrings(const std::string &refstrFilename, std::vector<std::string>& refRes)
+{
+	std::ifstream in(refstrFilename.c_str());
+	if (in)
+	{
+		std::string strLine;
+		while (std::getline(in, strLine))
+		{
+			refRes.push_back(strLine);
+		}
+		in.close();
+	}
+}
+
+void SVGImage::ReadFromFile(const std::string& refstrFilename)
+{
+	std::vector<std::string> rgLines;
+	ReadFileContentsIntoVectorOfStrings(refstrFilename, rgLines);
+
+	for (size_t i = 4; i < rgLines.size() - 1; i++)
+	{
+		std::string strLine = rgLines[i];
+		m_rgLines.push_back(strLine);
+	}
+
+}
+
+
 void SVGImage::MoveTo(double dX, double dY) // Moves virtual Cursor
 {
 	m_dCurrentPositionX = dX;
@@ -138,4 +169,13 @@ void SVGImage::TextAt(double dX, double dY, std::string strText) // Adds a Label
 
 	m_dCurrentPositionX = dX;
 	m_dCurrentPositionY = dY;
+}
+
+
+void SVGImage::AddSVG(const SVGImage& refsvg) // Adds the contents of the second SVG to this SVG
+{
+	for (auto line : refsvg.m_rgLines)
+	{
+		m_rgLines.push_back(line);
+	}
 }
