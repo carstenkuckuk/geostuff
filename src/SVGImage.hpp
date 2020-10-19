@@ -18,13 +18,17 @@ public:
 		double dYMin=51.3473, double dYMax=51.6461); // Ruhrgebiet: Duisburg..Unna
 	virtual ~SVGImage();
 
-	virtual void WriteToFile(std::string strFilename);
+	virtual void WriteToFile(const std::string &refstrFilename);
 	virtual void WriteToVectorOfStrings(std::vector<std::string> &refrgLines); // Mainly intended for implementing Unit Tests
+	virtual void ReadFromFile(const std::string& refstrFilename);
 
 	virtual void MoveTo(double dX, double dY); // Moves virtual Cursor
 	virtual void LineTo(double dX, double dY); // Adds a Line to the SVG contents and moves the virtual cursor
 	virtual void DiskAt(double dX, double dY, std::string strColor="black"); // Adds a Circle/disk/dot to the contents and moves the virtual cursor
 	virtual void TextAt(double dX, double dY, std::string strText); // Adds a Label to the contents and moves the virtual cursor
+
+	virtual void AddSVG(const SVGImage& refsvg); // Adds the contents of the second SVG to this SVG
+
 private:
 	virtual std::vector<std::string> CreateHeaderLines();
 	virtual std::vector<std::string> CreateFooterLines();
