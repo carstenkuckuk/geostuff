@@ -38,6 +38,7 @@ void ReadSVGFilesAndWriteThemToOneSVGFile(const std::string strResultSVGFile, co
 
 }
 
+
 int main(int argc, const char** argv)
 {
 	int nRet = 0;
