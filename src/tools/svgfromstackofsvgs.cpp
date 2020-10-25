@@ -22,36 +22,40 @@ bool ParseCommandLine(std::string &refstrFilename1, std::string& refstrFilename2
 	return bOk;
 }
 
-void ReadTwoSVGFilesAndWriteThemToOneSVGFile(const std::string strResultSVGFile, const std::string strInputSVGFilename1, const std::string strInputSVGFilename2)
+
+void ReadSVGFilesAndWriteThemToOneSVGFile(const std::string strResultSVGFile, const std::vector<std::string>& refrgInputFilenames)
 {
-	SVGImage svg1;
-	svg1.ReadFromFile(strInputSVGFilename1);
+	SVGImage svgCombiniedImage;
 
-	SVGImage svg2;
-	svg2.ReadFromFile(strInputSVGFilename2);
+	for (auto fn : refrgInputFilenames)
+	{
+		SVGImage svgNextImage;
+		svgNextImage.ReadFromFile(fn);
+		svgCombiniedImage.AddSVG(svgNextImage);
+	}
 
-	svg1.AddSVG(svg2);
-	svg1.WriteToFile(strResultSVGFile);
+	svgCombiniedImage.WriteToFile(strResultSVGFile);
+
 }
-
 
 int main(int argc, const char** argv)
 {
 	int nRet = 0;
 
-	std::string strResultSVGFile;
-	std::string strInputSVGFilename1;
-	std::string strInputSVGFilename2;
-
-	bool bParsedProperly = ParseCommandLine(strResultSVGFile, strInputSVGFilename1, strInputSVGFilename2, argc, argv);
-
-	if (bParsedProperly)
+	if (argc>=2)
 	{
-		ReadTwoSVGFilesAndWriteThemToOneSVGFile(strResultSVGFile, strInputSVGFilename1, strInputSVGFilename2);
+		std::string strResultSVGFile = argv[1];
+		std::vector<std::string> rgInputFilenames;
+		for (size_t i = 2; i < argc; i++)
+		{
+			std::string strInputFilename = argv[i];
+			rgInputFilenames.push_back(strInputFilename);
+		}
+		ReadSVGFilesAndWriteThemToOneSVGFile(strResultSVGFile, rgInputFilenames);
 	}
 	else
 	{
-		std::cout << "Usage: svgfromtstackofsvgs <TargetSVGFile> <InputSVGFile1> <InputSVGFile2>" << std::endl;
+		std::cout << "Usage: svgfromtstackofsvgs <TargetSVGFile> {<InputSVGFile>}" << std::endl;
 		nRet = 1;
 	}
 
