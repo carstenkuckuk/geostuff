@@ -50,6 +50,34 @@ add_executable(svgfromtrackfile
     src/tools/svgfromtrackfile.cpp
 )
 
+add_executable(svgfrommap
+	src/GPSObservation.cpp
+	src/GPSObservation.hpp
+	src/GPSTrackFile.cpp
+	src/GPSTrackFile.hpp
+	src/Roadmap.cpp
+	src/Roadmap.hpp
+	src/SVGImage.cpp
+	src/SVGImage.hpp
+
+    src/tools/svgfrommap.cpp
+)
+
+add_executable(addtrackfiletomap
+	src/GPSObservation.cpp
+	src/GPSObservation.hpp
+	src/GPSTrackFile.cpp
+	src/GPSTrackFile.hpp
+	src/MapBuilder.cpp
+	src/MapBuilder.hpp
+	src/Roadmap.cpp
+	src/Roadmap.hpp
+	src/SVGImage.cpp
+	src/SVGImage.hpp
+
+    src/tools/addtrackfiletomap.cpp
+)
+
 
 
 add_executable(wiglewifistats
