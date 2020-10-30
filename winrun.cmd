@@ -7,6 +7,7 @@ REM copy c:\data\backup.sqlite .
 REM ..\xxx\Release\wiglewifitotrackfile.exe backup.sqlite backup.trackfile
 REM ..\xxx\Release\svgfromtrackfile.exe backup.trackfile backup.svg
 ..\xxx\Release\svgfromlabellist.exe cities.trackfile cities.svg
+
 REM ..\xxx\Release\svgfromstackofsvgs.exe map.svg background.svg backup.svg cities.svg
 
 copy c:\data\backup.sqlite .
