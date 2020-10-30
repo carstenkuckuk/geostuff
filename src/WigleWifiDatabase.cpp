@@ -29,8 +29,8 @@ bool WigleWifiDatabase::Close()
 
 void WigleWifiDatabase::ReadAllGPSObservations(std::vector<GPSObservation>  &refrgGPSObservations)
 {
-	// "select time, lat, lon, altitude from location;"
-	std::string strSQL = "select time, lat, lon, altitude from location";
+	// only take into account measurements within 6 meters accuracy
+	std::string strSQL = "select time, lat, lon, altitude from location where accuracy<6.0";
 	sqlite3_stmt *pStmt = 0;
 	const char *pszTail = 0;
 
