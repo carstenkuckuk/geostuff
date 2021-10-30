@@ -12,6 +12,27 @@
 
 #include <stdio.h>
 
+
+RoadmapPoint::RoadmapPoint()
+:m_nPK(0), m_dLong(0.0), m_dLat(0.0), m_nWeight(0)
+{
+}
+
+RoadmapPoint::~RoadmapPoint()
+{
+}
+
+RoadmapConnection::RoadmapConnection()
+:m_nPK(0), m_nFromPointID(0), m_nToPointID(0), m_nWeight(0),
+m_nMinimumVelocityObserved(0.0), m_nMaximumVelocityObserved(0.0), m_nSumOfVelocitiesObserved(0.0)
+{
+}
+
+RoadmapConnection::~RoadmapConnection()
+{
+
+}
+
 Roadmap::Roadmap()
 {
 }
@@ -21,16 +42,7 @@ Roadmap::~Roadmap()
 }
 
 
-void Roadmap::AddPointAt(double dLong, double dLat, int nType)
-{
-	m_rgLong.push_back(dLong);
-	m_rgLat.push_back(dLat);
-	m_rgType.push_back(nType);
-}
-
-
-
-
+#if 0
 void ReadRoadmapFromFile(Roadmap& refRoadmap, const std::string& refstrFilename)
 {
 	FILE* fp = fopen(refstrFilename.c_str(), "r");
@@ -60,6 +72,7 @@ void ReadRoadmapFromFile(Roadmap& refRoadmap, const std::string& refstrFilename)
 		fclose(fp);
 	}
 }
+#endif
 
 void WriteRoadmapToFile(const Roadmap& refRoadmap, const std::string& refstrFilename)
 {
@@ -67,15 +80,32 @@ void WriteRoadmapToFile(const Roadmap& refRoadmap, const std::string& refstrFile
 
 	if (fp)
 	{
-		size_t nAnz = refRoadmap.m_rgLong.size();
-		for (size_t i = 0; i < nAnz; i++)
+		fprintf(fp, "%d,\n", (int)refRoadmap.m_rgRoadmapPoints.size());
+		for(auto &refrmp : refRoadmap.m_rgRoadmapPoints)
 		{
-			double dLong = refRoadmap.m_rgLong[i];
-			double dLat  = refRoadmap.m_rgLat[i];
-			int nType = refRoadmap.m_rgType[i];
+			int nPK = refrmp.m_nPK;
+			double dLong = refrmp.m_dLong;
+			double dLat  = refrmp.m_dLat;
+			int nWeight = refrmp.m_nWeight;
 
-			fprintf(fp, "%lf,%lf,%d,\n", dLong, dLat, nType);
+			fprintf(fp, "%d,%lf,%lf,%d,\n", nPK,dLong, dLat, nWeight);
 		}
+
+		fprintf(fp, "%d,\n", (int)refRoadmap.m_rgRoadmapConnections.size());
+		for (auto& refrmc : refRoadmap.m_rgRoadmapConnections)
+		{
+			int nPK = refrmc.m_nPK;
+			int nFromPointID = refrmc.m_nFromPointID;
+			int nToPointID = refrmc.m_nToPointID;
+			int nWeight = refrmc.m_nWeight;
+			double nMinimumVelocityObserved = refrmc.m_nMinimumVelocityObserved;
+			double nMaximumVelocityObserved = refrmc.m_nMaximumVelocityObserved;
+			double nSumOfVelocitiesObserved = refrmc.m_nSumOfVelocitiesObserved; // Mittlere Geschwindigkeit ist dann Summe durch Anzahl
+
+			fprintf(fp, "%d,%d,%d,%d,%lf,%lf,%lf,\n", nPK, nFromPointID, nToPointID, nWeight, nMinimumVelocityObserved, nMaximumVelocityObserved, nSumOfVelocitiesObserved);
+		}
+
+
 
 		fclose(fp);
 	}
