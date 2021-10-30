@@ -14,17 +14,42 @@
 #include <string>
 #include <vector>
 
+class RoadmapPoint
+{
+public:
+	RoadmapPoint();
+	virtual ~RoadmapPoint();
+
+	size_t m_nPK;
+	double m_dLong;
+	double m_dLat;
+	size_t m_nWeight;
+};
+
+class RoadmapConnection
+{
+public:
+	RoadmapConnection();
+	virtual ~RoadmapConnection();
+
+	size_t m_nPK;
+	size_t m_nFromPointID;
+	size_t m_nToPointID;
+	size_t m_nWeight;
+	double m_nMinimumVelocityObserved;
+	double m_nMaximumVelocityObserved;
+	double m_nSumOfVelocitiesObserved; // Mittlere Geschwindigkeit ist dann Summe durch Anzahl
+
+};
+
 class Roadmap
 {
 public:
 	Roadmap();
 	virtual ~Roadmap();
 
-	virtual void AddPointAt(double dLong, double dLat, int nType);
-
-	std::vector<double> m_rgLong;
-	std::vector<double> m_rgLat;
-	std::vector<double> m_rgType;
+	std::vector<RoadmapPoint> m_rgRoadmapPoints;
+	std::vector<RoadmapConnection> m_rgRoadmapConnections;
 
 };
 
