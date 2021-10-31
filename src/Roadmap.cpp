@@ -42,37 +42,84 @@ Roadmap::~Roadmap()
 }
 
 
-#if 0
 void ReadRoadmapFromFile(Roadmap& refRoadmap, const std::string& refstrFilename)
 {
 	FILE* fp = fopen(refstrFilename.c_str(), "r");
 
 	bool bMoreToRead = (fp != 0);
-	while (bMoreToRead)
+
+	if (bMoreToRead)
 	{
-		double dLong = 0.0;
-		double dLat = 0.0;
-		int nType = 0;
-		char buf[200]; buf[0] = 0;
-		int nRes = fscanf(fp, "%lf,%lf,%d,%[^\n]\n", &dLong, &dLat, &nType, &buf);
-		
-		if (nRes == 3)
+		char buf[100];
+		int nAnzPunkte = 0;
+		int nRes1 = fscanf(fp, "%d,%[^\n]\n", &nAnzPunkte, &buf);
+		if (nRes1 == 1)
 		{
-			refRoadmap.m_rgLong.push_back(dLong);
-			refRoadmap.m_rgLat.push_back(dLat);
-			refRoadmap.m_rgType.push_back(nType);
+			for (int i = 0; i < nAnzPunkte; i++)
+			{
+				int nPK = 0;
+				double dLong = 0;
+				double dLat = 0;
+				int nWeight = 0;
+				int nRes = fscanf(fp, "%d,%lf,%lf,%d,%[^\n]\n", &nPK, &dLong, &dLat, &nWeight, &buf);
+
+				RoadmapPoint rmp;
+				rmp.m_nPK = nPK;
+				rmp.m_dLong = dLong;
+				rmp.m_dLat = dLat;
+				rmp.m_nWeight = nWeight;
+				refRoadmap.m_rgRoadmapPoints.push_back(rmp);
+			}
 		}
 		else
 		{
 			bMoreToRead = false;
 		}
 	}
+
+	if (bMoreToRead)
+	{
+		char buf[100];
+		int nAnzConnections = 0;
+		int nRes1 = fscanf(fp, "%d,%[^\n]\n", &nAnzConnections, &buf);
+		if (nRes1 == 1)
+		{
+			for (int i = 0; i < nAnzConnections; i++)
+			{
+				int nPK = 0;
+				int nFromPointID = 0;
+				int nToPointID = 0;
+				int nWeight = 0;
+				double nMinimumVelocityObserved = 0;
+				double nMaximumVelocityObserved = 0;
+				double nSumOfVelocitiesObserved = 0;
+
+				fscanf(fp, "%d,%d,%d,%d,%lf,%lf,%lf,%[^\n]\n", &nPK, &nFromPointID, &nToPointID, &nWeight, &nMinimumVelocityObserved, &nMaximumVelocityObserved, &nSumOfVelocitiesObserved);
+
+				RoadmapConnection rmc;
+				rmc.m_nPK = nPK;
+				rmc.m_nFromPointID = nFromPointID;
+				rmc.m_nToPointID = nToPointID;
+				rmc.m_nWeight = nWeight;
+				rmc.m_nMinimumVelocityObserved = nMinimumVelocityObserved;
+				rmc.m_nMaximumVelocityObserved = nMaximumVelocityObserved;
+				rmc.m_nSumOfVelocitiesObserved = nSumOfVelocitiesObserved;
+				refRoadmap.m_rgRoadmapConnections.push_back(rmc);
+			}
+		}
+		else
+		{
+			bMoreToRead = false;
+		}
+	}
+
+
 	if (fp)
 	{
 		fclose(fp);
 	}
 }
-#endif
+
 
 void WriteRoadmapToFile(const Roadmap& refRoadmap, const std::string& refstrFilename)
 {
@@ -104,7 +151,6 @@ void WriteRoadmapToFile(const Roadmap& refRoadmap, const std::string& refstrFile
 
 			fprintf(fp, "%d,%d,%d,%d,%lf,%lf,%lf,\n", nPK, nFromPointID, nToPointID, nWeight, nMinimumVelocityObserved, nMaximumVelocityObserved, nSumOfVelocitiesObserved);
 		}
-
 
 
 		fclose(fp);
