@@ -153,7 +153,6 @@ void WriteRoadmapToFile(const Roadmap& refRoadmap, const std::string& refstrFile
 		}
 
 
-
 		fclose(fp);
 	}
 
