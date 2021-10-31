@@ -25,26 +25,11 @@ void MapBuilder::FeedGPSObservation(GPSObservation& refgpsobservation)
 		double dTime = refgpsobservation.m_nDateTime - m_LastObservation.m_nDateTime; // in millisekunden
 		double dTimeinH = dTime / 1000.0 / 60.0 / 60.0;;
 		double v = dinkm / dTimeinH;
-		if (d > 20)
-		{
-			if ((0 <= v) && (v <= 10))
-			{ // Fussgaenger
-				m_refRoadmap.AddPointAt(refgpsobservation.m_dLong, refgpsobservation.m_dLat, 1);
 
-			}
-			else
-				if ((10 <= v) && (v <= 50))
-				{// Strasse
-					m_refRoadmap.AddPointAt(refgpsobservation.m_dLong, refgpsobservation.m_dLat, 2);
+		int nIndex1 = m_refRoadmap.FindOrCreateRoadmapPointByLongLat(m_LastObservation.m_dLong, m_LastObservation.m_dLat);
+		int nIndex2 = m_refRoadmap.FindOrCreateRoadmapPointByLongLat(refgpsobservation.m_dLong, refgpsobservation.m_dLat);
+		m_refRoadmap.AddConnectionIfNotExists(nIndex1, nIndex2, v);
 
-				}
-				else
-				{//Autobahn
-					m_refRoadmap.AddPointAt(refgpsobservation.m_dLong, refgpsobservation.m_dLat, 3);
-
-				}
-
-			m_LastObservation = refgpsobservation;
-		}
+		m_LastObservation = refgpsobservation;
 
 }

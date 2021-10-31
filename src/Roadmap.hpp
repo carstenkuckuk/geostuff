@@ -48,6 +48,9 @@ public:
 	Roadmap();
 	virtual ~Roadmap();
 
+	size_t FindOrCreateRoadmapPointByLongLat(double dLong, double dLat, double dEpsilon=0.0001);
+	size_t AddConnectionIfNotExists(size_t nIndexPoint1, size_t nIndexPoint2, double dVelocity);
+
 	std::vector<RoadmapPoint> m_rgRoadmapPoints;
 	std::vector<RoadmapConnection> m_rgRoadmapConnections;
 
