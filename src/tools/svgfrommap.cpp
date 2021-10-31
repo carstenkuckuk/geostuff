@@ -36,25 +36,29 @@ void ReadRoadmapfileAndWriteToSVGFile(const std::string strRoadmapFilename, cons
 		/*dXMin =*/ 6.8976, /*dXMax =*/ 7.7120, // Ruhrgebiet: Hagen..Recklinghausen
 		/*dYMin =*/ 51.3473, /*dYMax =*/ 51.6461); // Ruhrgebiet: Duisburg..Unna
 
-	size_t nAnz = RM.m_rgLat.size();
-	for(size_t i=0; i<nAnz; i++)
+	for (auto& rmc : RM.m_rgRoadmapConnections)
 	{
-		double dLong = RM.m_rgLong[i];
-		double dLat  = RM.m_rgLat[i];
-		int    nType = RM.m_rgType[i];
-		switch (nType)
+		int nFromPointID = rmc.m_nFromPointID;
+		int nToPointID = rmc.m_nToPointID;
+		double dVelocity = rmc.m_nSumOfVelocitiesObserved / rmc.m_nWeight;
+		RoadmapPoint ptFrom = RM.m_rgRoadmapPoints[nFromPointID];
+		double dLong = ptFrom.m_dLong;
+		double dLat = ptFrom.m_dLat;
+
+		if ((0.0 <= dVelocity) && (dVelocity < 10.0))
 		{
-		case 1: // Fussgaenger 0..10 km/h
+			// Fussgaenger 0..10 km/h
 			svg.DiskAt(dLong, dLat, "green");
-			break;
-		case 2: // Strasse 10..50 km/h
+		}
+		if ((10.0 <= dVelocity) && (dVelocity < 50.0))
+		{
+			// Strasse 10..50 km/h
 			svg.DiskAt(dLong, dLat, "black");
-			break;
-		case 3: // Autobahn
+		}
+		if ((50.0 <= dVelocity) && (dVelocity < 300.0))
+		{
+			// Autobahn
 			svg.DiskAt(dLong, dLat, "blue");
-			break;
-		default:
-			break;
 		}
 
 	}
