@@ -42,6 +42,75 @@ Roadmap::~Roadmap()
 }
 
 
+size_t Roadmap::FindOrCreateRoadmapPointByLongLat(double dLong, double dLat, double dEpsilon)
+{
+	size_t nErg = 0;
+	bool bPunktGefunden = false;
+	for (auto& rmp : m_rgRoadmapPoints)
+	{
+		if ((rmp.m_dLong - dLong) * (rmp.m_dLong - dLong) + (rmp.m_dLat - dLat) * (rmp.m_dLat - dLat) < dEpsilon * dEpsilon)
+		{
+			bPunktGefunden = true;
+			nErg = rmp.m_nPK;
+		}
+	}
+
+	if (!bPunktGefunden)
+	{
+		RoadmapPoint rmp;
+		rmp.m_dLong = dLong;
+		rmp.m_dLat = dLat;
+		rmp.m_nPK = m_rgRoadmapPoints.size() + 1;
+		rmp.m_nWeight = 1;
+		m_rgRoadmapPoints.push_back(rmp);
+		nErg = rmp.m_nPK;
+	}
+
+	return nErg;
+}
+
+size_t Roadmap::AddConnectionIfNotExists(size_t nIndexPoint1, size_t nIndexPoint2, double dVelocity)
+{
+	size_t nErg = 0;
+	bool bGefunden = false;
+	for (auto& rmc : m_rgRoadmapConnections)
+	{
+		if ((rmc.m_nFromPointID == nIndexPoint1) && (rmc.m_nToPointID == nIndexPoint2))
+		{
+			nErg = rmc.m_nPK;
+			rmc.m_nSumOfVelocitiesObserved += dVelocity;
+			rmc.m_nWeight++;
+			if (dVelocity < rmc.m_nMinimumVelocityObserved)
+			{
+				rmc.m_nMinimumVelocityObserved = dVelocity;
+			}
+			if (rmc.m_nMaximumVelocityObserved < dVelocity)
+			{
+				rmc.m_nMaximumVelocityObserved = dVelocity;
+			}
+			bGefunden = true;
+		}
+	}
+	if (!bGefunden)
+	{
+		RoadmapConnection rmc;
+		rmc.m_nFromPointID = nIndexPoint1;
+		rmc.m_nToPointID = nIndexPoint2;
+		rmc.m_nSumOfVelocitiesObserved = dVelocity;
+		rmc.m_nWeight = 1;
+		rmc.m_nMinimumVelocityObserved = dVelocity;
+		rmc.m_nMaximumVelocityObserved = dVelocity;
+		rmc.m_nPK = m_rgRoadmapConnections.size() + 1;
+		m_rgRoadmapConnections.push_back(rmc);
+		nErg = rmc.m_nPK;
+	}
+	return nErg;
+}
+
+std::vector<RoadmapPoint> m_rgRoadmapPoints;
+std::vector<RoadmapConnection> m_rgRoadmapConnections;
+
+
 void ReadRoadmapFromFile(Roadmap& refRoadmap, const std::string& refstrFilename)
 {
 	FILE* fp = fopen(refstrFilename.c_str(), "r");
