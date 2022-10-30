@@ -14,7 +14,6 @@ copy c:\data\backup.sqlite .
 ..\xxx\Release\wiglewifitotrackfile.exe backup.sqlite     backup.trackfile
 ..\xxx\Release\addtrackfiletomap.exe    backup.trackfile  working.map
 
-Diese Datenbank hat Strahlenkrankheit
 copy c:\data\Bis20170603_backup.sqlite .
 ..\xxx\Release\wiglewifitotrackfile.exe Bis20170603_backup.sqlite     Bis20170603_backup.trackfile
 ..\xxx\Release\addtrackfiletomap.exe    Bis20170603_backup.trackfile  working.map
