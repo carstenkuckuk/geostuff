@@ -106,6 +106,17 @@ add_executable(wiglewifitotrackfile
     src/tools/wiglewifitotrackfile.cpp
 )
 
+add_executable(streetaddressfromlatlong
+	src/StreetAddress.hpp
+	src/StreetAddress.cpp
+	src/GeolocationFromFiledata.hpp
+	src/GeolocationFromFiledata.cpp
+	src/StreetAddressLatLongFile.hpp
+	src/StreetAddressLatLongFile.cpp
+
+	src/tools/streetaddressfromlatlong.cpp
+)
+
 add_executable(sqlite3
 	libs/sqlite-amalgamation-3081002/shell.c
 	libs/sqlite-amalgamation-3081002/sqlite3.c
