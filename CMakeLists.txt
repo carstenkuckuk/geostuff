@@ -117,6 +117,23 @@ add_executable(streetaddressfromlatlong
 	src/tools/streetaddressfromlatlong.cpp
 )
 
+add_executable(findrestingplaces
+	src/StreetAddress.hpp
+	src/StreetAddress.cpp
+	src/GeolocationFromFiledata.hpp
+	src/GeolocationFromFiledata.cpp
+	src/StreetAddressLatLongFile.hpp
+	src/StreetAddressLatLongFile.cpp
+	src/GPSObservation.cpp
+	src/GPSObservation.hpp
+	src/GPSTrackFile.cpp
+	src/GPSTrackFile.hpp
+	src/RestingplaceFinder.hpp
+	src/RestingplaceFinder.cpp
+
+	src/tools/findrestingplaces.cpp
+)
+
 add_executable(sqlite3
 	libs/sqlite-amalgamation-3081002/shell.c
 	libs/sqlite-amalgamation-3081002/sqlite3.c
