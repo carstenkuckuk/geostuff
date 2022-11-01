@@ -22,7 +22,7 @@ static double DegreesToRadians(double dDegrees)
 	return dDegrees / 180.0 * pi;
 }
 
-double ww_distance_in_meters(double dLat1, double dLong1, double dLat2, double dLong2)
+static double ww_distance_in_meters(double dLat1, double dLong1, double dLat2, double dLong2)
 {
 	// Altmeister: https://stackoverflow.com/questions/27126714/c-latitude-and-longitude-distance-calculator
 	double dLat1InRad = DegreesToRadians(dLat1);
@@ -65,10 +65,10 @@ bool Hypothese::ZeitsprungZuGross(__int64 nwwtm) // true, wenn mehr als zwei Min
 	return bErg;
 }
 
-bool Hypothese::GeschwindigkeitZuGross(double dLat, double dLong, __int64 nwwtm) // true, wenn man sich schneller als 6 km/h bewegt hat
+bool Hypothese::GeschwindigkeitZuGross(double dLat, double dLong, __int64 nwwtm) // true, wenn man sich schneller als 10 km/h bewegt hat
 {
 	double velocity_km_per_hour = ww_velocity_im_km_per_hour(m_dLetzteLat, m_dLetzteLong, m_nwwtmLetztezeit, dLat, dLong, nwwtm);
-	bool bErg = velocity_km_per_hour > 6.0;
+	bool bErg = velocity_km_per_hour > 10.0;
 	return bErg;
 }
 
@@ -79,10 +79,10 @@ bool Hypothese::DistanzZuGross(double dLat, double dLong) // true, wenn man sich
 	return bErg;
 }
 
-bool Hypothese::ZeitAusreichendFuerAufenthaltsort(__int64 nwwtm) // true, wenn wir mindestens 15 Minuten zusammen haben
+bool Hypothese::ZeitAusreichendFuerAufenthaltsort(__int64 nwwtm) // true, wenn wir mindestens 10 Minuten zusammen haben
 {
 	double delta_t_seconds = ww_delta_t_in_seconds(m_nwwtmStartzeit, nwwtm);
-	bool bErg = delta_t_seconds > 15 * 60; // mehr als 15 Minuten
+	bool bErg = delta_t_seconds > 10 * 60; // mehr als 10 Minuten
 	return bErg;
 
 }
