@@ -31,8 +31,24 @@ copy c:\data\Bis20190808_backup.sqlite .
 ..\xxx\Release\addtrackfiletomap.exe    Bis20190808_backup.trackfile  working.map
 
 copy c:\data\Bis20200724_backup.sqlite .
-..\xxx\Release\wiglewifitotrackfile.exe Bis20200724_backupsqlite     Bis20200724_backup.trackfile
+..\xxx\Release\wiglewifitotrackfile.exe Bis20200724_backup.sqlite     Bis20200724_backup.trackfile
 ..\xxx\Release\addtrackfiletomap.exe    Bis20200724_backup.trackfile  working.map
+
+copy c:\data\Bis20210419_backup_MotoG5S.sqlite .
+..\xxx\Release\wiglewifitotrackfile.exe Bis20210419_backup_MotoG5S.sqlite     Bis20210419_backup.trackfile
+..\xxx\Release\addtrackfiletomap.exe    Bis20210419_backup.trackfile  working.map
+
+
+copy c:\data\Bis20220327_backup.sqlite .
+..\xxx\Release\wiglewifitotrackfile.exe Bis20220327_backup.sqlite     Bis20220327_backup.trackfile
+..\xxx\Release\addtrackfiletomap.exe    Bis20210419_backup.trackfile  working.map
+
+copy c:\data\Bis20221015_backup.sqlite .
+..\xxx\Release\wiglewifitotrackfile.exe Bis20221015_backup.sqlite     Bis20221015_backup.trackfile
+..\xxx\Release\addtrackfiletomap.exe    Bis20221015_backup.trackfile  working.map
+
+
+
 
 
 ..\xxx\Release\svgfrommap.exe working.map working.svg

@@ -53,10 +53,12 @@ void FindRestingPlacesInTrackfileAndPrintThemUsingGeodatafile(const std::string 
 		double dLong = rp.GetLong();
 //		time_t tmFrom = rp.GetTimeFrom();
 //		time_t tmTo = rp.GetTimeTo();
-		StreetAddress sa = glfd.GetStreetAddressByLatitudeLongitude(dLat, dLong);
+		std::pair<StreetAddress,double> res = glfd.GetStreetAddressByLatitudeLongitude(dLat, dLong);
+		StreetAddress sa = res.first;
+		double distance_in_meters = res.second;
 		std::string strSA = toString(sa);
 
-		std::cout << "(" << dLat << "," << dLong << ") " << strSA << std::endl;
+		std::cout << "(" << dLat << "," << dLong << ") d="<<distance_in_meters<<"m " << strSA << std::endl;
 	}
 
 

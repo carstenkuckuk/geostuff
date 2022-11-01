@@ -17,7 +17,7 @@ public:
 	void LoadDataFromFile(const std::string &refstrGeodataFilename);
 	void InsertStreetAddressLatLong(const StreetAddress& refsa, double dLat, double dLong);
 
-	StreetAddress GetStreetAddressByLatitudeLongitude(double dLat, double dLong);
+	std::pair<StreetAddress, double> GetStreetAddressByLatitudeLongitude(double dLat, double dLong); // Adresse plus Distanz in Metern
 
 protected:
 	std::vector<StreetAddress> m_rgStreetAddress;
